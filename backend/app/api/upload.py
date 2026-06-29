@@ -1,5 +1,8 @@
 from fastapi import APIRouter, UploadFile, File
 
+from app.services.file_service import save_uploaded_file
+from app.services.document_processor import process_document
+
 router = APIRouter(
     prefix="/upload",
     tags=["Upload"]
@@ -7,8 +10,14 @@ router = APIRouter(
 
 
 @router.post("/")
-async def upload_document(file: UploadFile = File(...)):
+async def upload(file: UploadFile = File(...)):
+
+    saved = await save_uploaded_file(file)
+
+    processed = process_document(saved["path"])
+
     return {
-        "filename": file.filename,
-        "content_type": file.content_type
+        "filename": saved["original_name"],
+        "characters": processed["characters"],
+        "preview": processed["text"][:500]
     }

@@ -1,17 +1,20 @@
-import os
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from google import genai
 
-from dotenv import load_dotenv
+def create_chunks(text: str):
 
-load_dotenv()
+    splitter = RecursiveCharacterTextSplitter(
 
-client = genai.Client(
+        chunk_size=800,
 
-    api_key=os.getenv(
+        chunk_overlap=150,
 
-        "GEMINI_API_KEY"
-
+        separators=[
+            "\n\n",
+            "\n",
+            ". ",
+            " "
+        ]
     )
 
-)
+    return splitter.create_documents([text])

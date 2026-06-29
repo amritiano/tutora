@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     MODEL_NAME: str
 
     CHROMA_DB: str
+    COLLECTION_NAME: str
 
     class Config:
         env_file = ".env"

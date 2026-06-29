@@ -5,21 +5,21 @@ from app.config import settings
 
 app = FastAPI(
     title=settings.APP_NAME,
-    version="1.0.0",
+    version="1.0.0"
 )
 
 app.include_router(upload_router)
 
 
 @app.get("/")
-def home():
+def root():
     return {
-        "message": "Welcome to Tutora AI"
+        "message": "Tutora Backend Running 🚀"
     }
 
 
 @app.get("/health")
 def health():
     return {
-        "status": "running"
+        "status": "healthy"
     }
