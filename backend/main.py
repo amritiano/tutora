@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 
-from app.api.upload import router as upload_router
 from app.config import settings
+
+from app.api.upload import router as upload_router
+from app.api.quiz import router as quiz_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -9,6 +11,7 @@ app = FastAPI(
 )
 
 app.include_router(upload_router)
+app.include_router(quiz_router)
 
 
 @app.get("/")

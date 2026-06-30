@@ -1,38 +1,16 @@
 from fastapi import APIRouter
 
-from app.schemas.topic_schema import TopicRequest
-
-from app.services.topic_service import extract_topics
-
+from app.services.quiz_generator import quiz_generator
 
 router = APIRouter(
-
-prefix="/api/topics",
-
-tags=["Topics"]
-
+    prefix="/quiz",
+    tags=["Quiz"]
 )
 
 
-@router.post("/")
+@router.post("/start")
+async def start_quiz():
 
-def get_topics(
+    quiz = quiz_generator.generate()
 
-request:TopicRequest
-
-):
-
-    result = extract_topics(
-
-        request.content
-
-    )
-
-
-    return {
-
-        "success":True,
-
-        "data":result
-
-    }
+    return quiz

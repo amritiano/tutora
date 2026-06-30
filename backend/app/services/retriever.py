@@ -3,14 +3,11 @@ from app.database.chroma import db
 
 class Retriever:
 
-    def retrieve(self, n_results: int = 10):
+    def retrieve(self):
 
-        results = db.collection.query(
-            query_texts=["main concepts"],
-            n_results=n_results
-        )
+        results = db.collection.get()
 
-        documents = results["documents"][0]
+        documents = results.get("documents", [])
 
         return "\n\n".join(documents)
 

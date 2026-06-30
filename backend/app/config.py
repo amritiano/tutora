@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     APP_NAME: str
     DEBUG: bool
 
-    GEMINI_API_KEY: str
+    OPENROUTER_API_KEY: str
     MODEL_NAME: str
 
     CHROMA_DB: str

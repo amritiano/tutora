@@ -1,24 +1,47 @@
-from app.services.gemini_service import client
+import json
 
-from app.prompts.topic_prompt import topic_prompt
-
-
-def extract_topics(
-
-content:str
-
-):
-
-    prompt = topic_prompt(content)
+from app.prompts.quiz_prompt import QUIZ_PROMPT
+from app.services.retriever import retriever
+from app.services.llm import llm
 
 
-    response = client.models.generate_content(
+class QuizGenerator:
 
-        model="gemini-2.5-flash",
+    def generate(self):
 
-        contents=prompt
+        # Get document context from ChromaDB
+        context = retriever.retrieve()
 
-    )
+        # Create prompt
+        prompt = QUIZ_PROMPT.format(
+            context=context
+        )
+
+        # Ask the LLM
+        response = llm.generate(prompt)
+
+        # Remove markdown if the model returns ```json
+        response = response.replace("```json", "")
+        response = response.replace("```", "")
+        response = response.strip()
+
+        try:
+            quiz = json.loads(response)
+
+        except Exception:
+
+            quiz = {
+                "title": "Quiz",
+                "questions": [
+                    {
+                        "difficulty": "Easy",
+                        "concept": "General",
+                        "question": response
+                    }
+                ]
+            }
+
+        return quiz
 
 
-    return response.text
+quiz_generator = QuizGenerator()
