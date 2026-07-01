@@ -1,0 +1,56 @@
+:root{
+  --bg:#09090B;
+  --surface:#18181B;
+  --border:#2A2A2A;
+
+  --primary:#5B8CFF;
+  --text:#FFFFFF;
+  --muted:#A1A1AA;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  background:var(--bg);
+
+  color:var(--text);
+
+  font-family:
+      Inter,
+      Segoe UI,
+      sans-serif;
+
+}
+
+button{
+
+  cursor:pointer;
+
+  border:none;
+
+  transition:.25s;
+
+}
+
+button:hover{
+
+  transform:translateY(-2px);
+
+}
+
+a{
+
+  color:inherit;
+
+  text-decoration:none;
+
+}
