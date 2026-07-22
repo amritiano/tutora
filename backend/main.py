@@ -6,7 +6,7 @@ from app.config import settings
 
 from app.api.upload import router as upload_router
 from app.api.quiz import router as quiz_router
-from app.api.evaluate import router as evaluate_router
+#from app.api.evaluate import router as evaluate_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -24,7 +24,7 @@ app.add_middleware(
 )
 app.include_router(upload_router)
 app.include_router(quiz_router)
-app.include_router(evaluate_router)
+#app.include_router(evaluate_router)
 
 
 @app.get("/")
