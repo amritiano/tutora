@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { API_URL } from "../config";
 function Upload() {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ function Upload() {
     console.log("Uploading...");
 
     await axios.post(
-      "http://127.0.0.1:8000/upload/",
+      `${API_URL}/upload/`,
       formData,
       {
         headers: {
@@ -35,7 +35,7 @@ function Upload() {
     console.log("Generating quiz...");
 
     const quiz = await axios.post(
-      "http://127.0.0.1:8000/quiz/start"
+      `${API_URL}/quiz/start`
     );
 
     navigate("/teaching", {
