@@ -150,6 +150,7 @@ Learning Report
 
 ---
 
+<!-- 
 # 📸 Screenshots
 
 ### Dashboard
@@ -175,6 +176,8 @@ Learning Report
 > *(Add screenshot here)*
 
 ---
+--!>
+
 
 # 💡 Future Improvements
 
